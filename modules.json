@@ -1,0 +1,27 @@
+{
+  "name": "",
+  "homePage": "",
+  "repos": {
+    "https://github.com/nf-core/modules.git": {
+      "modules": {
+        "nf-core": {
+          "bclconvert": {
+            "branch": "master",
+            "git_sha": "5e11ada66910fd4202edef983be5a77ed487ecba",
+            "installed_by": ["modules"]
+          },
+          "fastqc": {
+            "branch": "master",
+            "git_sha": "3009f27c4e4b6e99da4eeebe82799e13924a4a1f",
+            "installed_by": ["modules"]
+          },
+          "seqtk/sample": {
+            "branch": "master",
+            "git_sha": "a46713779030a5f508117080cbf4b693dd4c6e33",
+            "installed_by": ["modules"]
+          }
+        }
+      }
+    }
+  }
+}
