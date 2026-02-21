@@ -1,0 +1,30 @@
+{
+    "projectName": "$project_name",
+    "productType": "Reveal",
+    "normalization": "PlateControl",
+    "sampleMatrix": "$sample_type",
+    "reportComment": "Generated report by Olink pipeline",
+    "selectedDataAnalysisRefIds": [
+        "$dataAnalysisRefIds"
+    ],
+    "plateLayouts": [
+        {
+            "path": "$design_csv_path",
+            "plateId": "plate1"
+        }
+    ],
+    "runs": [
+        {
+            "path": "$ngs2counts_out",
+            "runUnits": [
+                {
+                    "plateLayout": "plate1",
+                    "libraryNumber": 1,
+                    "indexPlate": "A",
+                    "panel": "Reveal",
+                    "included": true
+                }
+            ]
+        }
+    ]
+}
