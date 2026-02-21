@@ -1,5 +1,5 @@
 import groovy.text.SimpleTemplateEngine
-process OLINK_NPX_MAP_CREATE {
+process OLINK_REVEAL_NPX_MAP_PROJECT_CREATE {
     tag "$meta.id"
     label 'process_medium'
 
@@ -60,7 +60,7 @@ EOF
     """
 }
 
-process OLINK_NPX_MAP_EXPORT {
+process OLINK_REVEAL_NPX_MAP_PROJECT_EXPORT {
     tag "$meta.id"
     label 'process_medium'
 
