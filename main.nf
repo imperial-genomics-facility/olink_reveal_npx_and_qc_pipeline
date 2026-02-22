@@ -59,7 +59,7 @@ workflow {
 
 output {
     bclconvert_report {
-        path { meta, reports -> "bclconvert/${meta.id}/${reports.name}"}
+        path "bclconvert"
     }
     npx_qc_html {
         path "npx_qc_report"
