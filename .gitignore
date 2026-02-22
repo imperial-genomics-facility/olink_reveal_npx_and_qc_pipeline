@@ -8,6 +8,7 @@ __pycache__/
 *Reveal Fixed LOD - csv file.csv
 *.parquet
 *.sif
+*:Zone.Identifier
 
 # C extensions
 *.so
