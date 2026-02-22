@@ -56,7 +56,7 @@ workflow {
     publish:
         bclconvert_report = DEMULT_SUBSAMPLE_QC.out.bclconvert_report
         ngs2counts_vr = OLINK_COUNT_QC.out.ngs2count_vr
-        npx_export = OLINK_COUNT_QC.out.npx_map_out
+        npx_export = OLINK_COUNT_QC.out.npx_export
         npx_qc_html = OLINK_COUNT_QC.out.npx_qc_html
         npx_map_vr = OLINK_COUNT_QC.out.npx_map_vr
 }

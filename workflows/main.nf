@@ -71,7 +71,7 @@ workflow OLINK_COUNT_QC {
     emit:
         ngs2count_out = OLINK_NGS2COUNTS.out.ngs2counts
         ngs2count_vr = OLINK_NGS2COUNTS.out.versions
-        npx_map_out = OLINK_REVEAL_NPX_MAP_PROJECT_CREATE.out.npx_map_project
+        npx_export = OLINK_REVEAL_NPX_MAP_PROJECT_EXPORT.out.npx_export
         npx_map_vr = OLINK_REVEAL_NPX_MAP_PROJECT_CREATE.out.npx_version
         npx_qc_html = OLINK_REVEAL_R_QC.out.npx_qc_html
 }

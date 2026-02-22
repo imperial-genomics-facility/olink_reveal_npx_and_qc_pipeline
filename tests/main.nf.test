@@ -22,7 +22,9 @@ nextflow_pipeline {
 
         then {
             assert workflow.success
-            //assert path("$launchDir/results/bclconvert/output/Reports/SampleSheet.csv").exists()
+            assert path("$launchDir/results/bclconvert/output/Reports/SampleSheet.csv").exists()
+            assert path("$launchDir/results/npx_qc_report/olink_reveal_QC_report.html").exists()
+            assert path("$launchDir/results/npx_export/export_dir/test.parquet").exists()
         }
 
     }
