@@ -101,7 +101,8 @@ process OLINK_REVEAL_NPX_MAP_PROJECT_EXPORT {
 
     stub:
     """
-    mkdir -p "export_dir"
+    mkdir -p export_dir
+    touch export_dir/test.parquet
     touch versions.yml
     """
 }

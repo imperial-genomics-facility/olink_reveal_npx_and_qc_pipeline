@@ -31,7 +31,7 @@ workflow DEMULT_SUBSAMPLE_QC {
         FASTQC(SEQTK_SAMPLE.out.reads)
     emit:
         bclconvert_report = BCLCONVERT.out.reports
-        bclconvert_vr = BCLCONVERT.out.versions
+        bclconvert_vr = BCLCONVERT.out.versions_bclconvert
         fastqc_html = FASTQC.out.html
         fastqc_vr = FASTQC.out.versions_fastqc
 }
@@ -64,12 +64,13 @@ workflow OLINK_COUNT_QC {
             OLINK_REVEAL_NPX_MAP_PROJECT_CREATE.out.npx_map_project
         )
         OLINK_REVEAL_R_QC(
+            OLINK_NGS2COUNTS.out.ngs2counts,
             OLINK_REVEAL_NPX_MAP_PROJECT_EXPORT.out.parquet_file,
             reveal_fixed_lod_csv
         )
     emit:
-        ngs2count_out = OLINK_NGS2COUNTS.out.ngs2count
-        ngs2count_vrt = OLINK_NGS2COUNTS.out.versions
+        ngs2count_out = OLINK_NGS2COUNTS.out.ngs2counts
+        ngs2count_vr = OLINK_NGS2COUNTS.out.versions
         npx_map_out = OLINK_REVEAL_NPX_MAP_PROJECT_CREATE.out.npx_map_project
         npx_map_vr = OLINK_REVEAL_NPX_MAP_PROJECT_CREATE.out.npx_version
         npx_qc_html = OLINK_REVEAL_R_QC.out.npx_qc_html

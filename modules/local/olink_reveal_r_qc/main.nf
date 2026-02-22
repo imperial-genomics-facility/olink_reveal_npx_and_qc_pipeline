@@ -6,6 +6,7 @@ process OLINK_REVEAL_R_QC {
     container "imperialgenomicsfacility/olink_r_qc:v0.1" 
 
     input:
+    tuple val(meta), path(ngs2counts)
     path npx_parquet_file
     path reveal_fixed_lod_csv
 

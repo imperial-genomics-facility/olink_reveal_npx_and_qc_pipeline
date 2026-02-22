@@ -44,6 +44,7 @@ workflow {
         )
         // run olink processing
         OLINK_COUNT_QC(
+            params.run_id,
             params.run_dir,
             params.plate_design_csv,
             params.reveal_fixed_lod_csv,
@@ -54,8 +55,10 @@ workflow {
         )
     publish:
         bclconvert_report = DEMULT_SUBSAMPLE_QC.out.bclconvert_report
+        ngs2counts_vr = OLINK_COUNT_QC.out.ngs2count_vr
         npx_export = OLINK_COUNT_QC.out.npx_map_out
         npx_qc_html = OLINK_COUNT_QC.out.npx_qc_html
+        npx_map_vr = OLINK_COUNT_QC.out.npx_map_vr
 }
 
 output {
@@ -66,6 +69,12 @@ output {
         path "npx_qc_report"
     }
     npx_export {
+        path "npx_export"
+    }
+    ngs2counts_vr {
+        path "ngs2counts"
+    }
+    npx_map_vr {
         path "npx_export"
     }
 }

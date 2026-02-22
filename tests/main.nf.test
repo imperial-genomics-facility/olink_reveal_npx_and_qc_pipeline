@@ -1,19 +1,28 @@
 nextflow_pipeline {
 
     name "Test Workflow main.nf"
-    script "main.nf"
+    script "../main.nf"
+    options "-stub-run"
 
-    test("Should run without failures") {
+    test("Should run without failures, using stub") {
 
         when {
             params {
-                // define parameters here. Example: 
-                // outdir = "tests/results"
+                run_id = "run1"
+                run_dir = "${projectDir}/workflows/templates"
+                project_name = "project1"
+                sample_type = "test_samples"
+                plate_design_csv = "${projectDir}/test_data/plate_design.csv"
+                reveal_fixed_lod_csv = "${projectDir}/test_data/reveal_fixed_lod.csv"
+                dataAnalysisRefIds = "test3"
+                panelDataArchive = "${projectDir}/test_data/panelDataArchive.dat"
+                samplesheet = "${projectDir}/workflows/templates/samplesheet.csv"
             }
         }
 
         then {
             assert workflow.success
+            //assert path("$launchDir/results/bclconvert/output/Reports/SampleSheet.csv").exists()
         }
 
     }
