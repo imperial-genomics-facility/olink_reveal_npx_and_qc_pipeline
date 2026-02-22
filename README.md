@@ -10,6 +10,7 @@ A Nextflow pipeline for raw sequencing run to NPX file and QC report generation
     `cd modules/nf-core/bclconvert`
 
 * Step 2: Download BCLConvert from [Illumina website](https://support.illumina.com/downloads/bcl-convert-v4-4-6-installers.html)
+
 * Step 3: Build Docker image
 
     `docker build -t bclconvert:v4.4.6 .`
@@ -32,15 +33,19 @@ A Nextflow pipeline for raw sequencing run to NPX file and QC report generation
 
     `docker build -t igf_olink_ngs2counts:v6.2 .`
 
-* Step 4: Export Docker image to tar
+* Step 3: Export Docker image to tar
 
     `docker image save igf_olink_ngs2counts:v6.2 -o igf_olink_ngs2counts_v6.2.tar`
 
-* Step 5: Build Singularity image
+* Step 4: Build Singularity image
 
     `singularity build igf_olink_ngs2counts_v6.2.sif docker-archive:igf_olink_ngs2counts_v6.2.tar`
 
 ### Olink NPX-MAP-CLI
+
+* Step 1: Download NPX-MAP-CLI package from [Olink website](https://olink.com/software/download)
+
+* Step 2: Extract the zip file and copy the `npx-map-cli.sif` from `npx-map-cli-hpc.zip`
 
 ### Olink Reveal R
 
@@ -52,10 +57,10 @@ A Nextflow pipeline for raw sequencing run to NPX file and QC report generation
 
     `docker build -t igf_olink_r_qc:v0.1 .`
 
-* Step 4: Export Docker image to tar
+* Step 3: Export Docker image to tar
 
     `docker image save igf_olink_r_qc:v0.1 -o igf_olink_r_qc_v0.1.tar`
 
-* Step 5: Build Singularity image
+* Step 4: Build Singularity image
 
     `singularity build igf_olink_r_qc_v0.1.sif docker-archive:igf_olink_r_qc_v0.1.tar`
