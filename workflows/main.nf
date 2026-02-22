@@ -2,13 +2,21 @@ include { BCLCONVERT } from '../modules/nf-core/bclconvert/main'
 include { FASTQC } from '../modules/nf-core/fastqc/main'
 include { SEQTK_SAMPLE } from '../modules/nf-core/seqtk/sample/main'
 include { OLINK_NGS2COUNTS } from '../modules/local/olink_reveal_ngs2counts/main'
-include { OLINK_REVEAL_NPX_MAP_PROJECT_CREATE;OLINK_REVEAL_NPX_MAP_PROJECT_EXPORT } from '../modules/local/olink_reveal_npx_map/main'
+include { OLINK_REVEAL_NPX_MAP_PROJECT_CREATE } from '../modules/local/olink_reveal_npx_map/main'
+include { OLINK_REVEAL_NPX_MAP_PROJECT_EXPORT } from '../modules/local/olink_reveal_npx_map/main'
 include { OLINK_REVEAL_R_QC } from '../modules/local/olink_reveal_r_qc/main'
 
 workflow DEMULT_SUBSAMPLE_QC {
     take:
-        run_ch  // [id: run], samplesheet, run_path
+        run_id
+        run_dir
+        // run_ch  // [id: run], samplesheet, run_path
     main:
+        run_ch = channel.of(tuple(
+            [id: run_id],
+            file("templates/samplesheet.csv"),
+            file(run_dir)
+        ))
         BCLCONVERT(run_ch)
         undetermined_fastqs = BCLCONVERT.out.undetermined
         formatted_fqs = undetermined_fastqs
