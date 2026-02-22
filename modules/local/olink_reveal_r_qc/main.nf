@@ -10,7 +10,7 @@ process OLINK_REVEAL_R_QC {
     path reveal_fixed_lod_csv
 
     output:
-    tuple val(meta), path("olink_reveal_QC_report.html"), emit: npx_qc_html
+    path "olink_reveal_QC_report.html" , emit: npx_qc_html
 
     script:
     // Exit if running this module with -profile conda / -profile mamba 
