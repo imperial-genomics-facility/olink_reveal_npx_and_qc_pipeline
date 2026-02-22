@@ -2,13 +2,25 @@
 
 ### Build docker image
 
-* `docker build -t igf_olink_r_qc:v0.1 .`
+Check main README.md for build instructions.
 
-### Convert to Singularity image
+## Usage
 
-* Export Docker image:
-    `docker image save igf_olink_r_qc:v0.1 -o igf_olink_r_qc_v0.1.tar`
+### How to use this image for running Jupyter lab instance?
 
-* Build Singularity image
-    `singularity build igf_olink_r_qc_v0.1.sif docker-archive:igf_olink_r_qc_v0.1.tar`
+* Run Jupyter lab instance using this example code.
+<code><pre>docker run 
+  -p 8888:8888 
+  -v /YOUR_DATA_DIR:/data 
+  igf_olink_r_qc:vX.Y 
+  bash -c "cd /data;jupyter lab --no-browser --ip=0.0.0.0 --ServerApp.token=YOUR_TOKEN"</pre></code>
+* Open any browser and go to `localhost:8888`
 
+### How to use this image using RStudio
+
+* Run RStudio using this example command
+<code><pre>docker run 
+ 	-e PASSWORD=bioc 
+ 	-p 8787:8787 
+ 	igf_olink_r_qc:vX.Y</pre></code>
+* Open any browser and go to `localhost:8787`
