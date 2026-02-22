@@ -22,6 +22,26 @@ A Nextflow pipeline for raw sequencing run to NPX file and QC report generation
 
     `singularity build bclconvert_v4.4.6.sif docker-archive:bclconvert_v4.4.6.tar`
 
+### Olink NGS2COUNTS
+
+* Step 1: Go to olink_reveal_ngs2counts module directory
+
+    `cd modules/local/olink_reveal_ngs2counts`
+
+* Step 2: Build Docker image
+
+    `docker build -t igf_olink_ngs2counts:v6.2 .`
+
+* Step 4: Export Docker image to tar
+
+    `docker image save igf_olink_ngs2counts:v6.2 -o igf_olink_ngs2counts_v6.2.tar`
+
+* Step 5: Build Singularity image
+
+    `singularity build igf_olink_ngs2counts_v6.2.sif docker-archive:igf_olink_ngs2counts_v6.2.tar`
+
+### Olink NPX-MAP-CLI
+
 ### Olink Reveal R
 
 * Step 1: Go to olink_reveal_r_qc module directory
