@@ -7,7 +7,7 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-COPY ngs2count /usr/bin/ngs2count
+COPY ngs2counts /usr/bin/ngs2count
 
 RUN chmod a+x /usr/bin/ngs2count
 
