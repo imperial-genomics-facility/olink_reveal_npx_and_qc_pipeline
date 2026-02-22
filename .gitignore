@@ -5,6 +5,9 @@ __pycache__/
 
 # custom
 *ngs2count
+*Reveal Fixed LOD - csv file.csv
+*.parquet
+*.sif
 
 # C extensions
 *.so
