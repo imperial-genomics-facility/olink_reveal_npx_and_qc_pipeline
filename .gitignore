@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 # custom
-*ngs2count
+*ngs2counts
 *Reveal Fixed LOD - csv file.csv
 *.parquet
 *.sif
@@ -214,3 +214,4 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+modules/local/olink_reveal_ngs2counts/ngs2counts
