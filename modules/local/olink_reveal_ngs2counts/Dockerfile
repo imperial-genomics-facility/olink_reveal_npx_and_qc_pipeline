@@ -1,5 +1,5 @@
 FROM ubuntu:26.04
-ARG NGS2COUNT_VERSION=""
+ARG NGS2COUNT_VERSION="6.2.0"
 LABEL description="Docker image containing ngs2count"
 LABEL version="$NGS2COUNT_VERSION"
 
