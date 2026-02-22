@@ -22,11 +22,17 @@ include { OLINK_COUNT_QC } from './workflows/main'
 workflow {
     main:
         // Validate params first
-        def missing_params = ['run_id', 'run_dir', 'project_name', 'sample_type',
-                              'plate_design_csv', 'reveal_fixed_lod_csv',
-                              'dataAnalysisRefIds', 'panelDataArchive']
-            .findAll { params[it] == null }
-
+        def required_params = [
+            'run_id',
+            'run_dir',
+            'project_name',
+            'sample_type',
+            'plate_design_csv',
+            'reveal_fixed_lod_csv',
+            'dataAnalysisRefIds',
+            'panelDataArchive'
+        ]
+        def missing_params = required_params.findAll { param -> params[param] == null }
         if (missing_params) {
             error "Missing required parameters:\n${missing_params.collect { "  --${it}" }.join('\n')}"
         }
