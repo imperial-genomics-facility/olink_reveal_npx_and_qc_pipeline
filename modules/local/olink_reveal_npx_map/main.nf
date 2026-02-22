@@ -21,7 +21,7 @@ process OLINK_REVEAL_NPX_MAP_PROJECT_CREATE {
     script:
     // Exit if running this module with -profile conda / -profile mamba / -profile docker / -profile podman
     if (workflow.profile.tokenize(',').intersect(['conda', 'mamba', 'docker', 'podman']).size() >= 1) {
-        error("OLINK module does only support Singularity.")
+        error("OLINK module only supports Singularity.")
     }
     def args = task.ext.args ?: ''
     // Get template and create json file
@@ -73,12 +73,13 @@ process OLINK_REVEAL_NPX_MAP_PROJECT_EXPORT {
 
     output:
     tuple val(meta), path("export_dir"), emit: npx_export
-    path  "versions.yml"               , emit: npx_version
+    path "export_dir/*.parquet"        , emit: parquet_file
+    path "versions.yml"                , emit: npx_version
 
     script:
     // Exit if running this module with -profile conda / -profile mamba / -profile docker / -profile podman
     if (workflow.profile.tokenize(',').intersect(['conda', 'mamba', 'docker', 'podman']).size() >= 1) {
-        error("OLINK module does only support Singularity.")
+        error("OLINK module only supports Singularity.")
     }
     def args = task.ext.args ?: ''
     """
