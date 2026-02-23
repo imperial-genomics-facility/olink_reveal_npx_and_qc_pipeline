@@ -61,7 +61,8 @@ workflow OLINK_COUNT_QC {
             olink_project_ch
         )
         OLINK_REVEAL_NPX_MAP_PROJECT_EXPORT(
-            OLINK_REVEAL_NPX_MAP_PROJECT_CREATE.out.npx_map_project
+            OLINK_REVEAL_NPX_MAP_PROJECT_CREATE.out.npx_map_project,
+            panelDataArchive
         )
         OLINK_REVEAL_R_QC(
             OLINK_NGS2COUNTS.out.ngs2counts,
