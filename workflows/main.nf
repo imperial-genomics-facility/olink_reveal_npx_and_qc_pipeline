@@ -14,7 +14,7 @@ workflow DEMULT_SUBSAMPLE_QC {
     main:
         run_ch = channel.of(tuple(
             [id: run_id],
-            file("templates/samplesheet.csv"),
+            file("${moduleDir}/templates/samplesheet.csv"),
             file(run_dir)
         ))
         BCLCONVERT(run_ch)
