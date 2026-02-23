@@ -39,7 +39,7 @@ process OLINK_REVEAL_NPX_MAP_PROJECT_CREATE {
     cat > npx_config.json <<'EOF'
 ${string_conf}
 EOF
-
+    /app/npx-map-cli/npx-map-cli \\
     project \\
       create \\
       ${args} \\
@@ -49,7 +49,7 @@ EOF
     
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        npx_map: \$( --version )
+        npx_map: \$( /app/npx-map-cli/npx-map-cli --version )
     END_VERSIONS
     """
 
@@ -83,6 +83,7 @@ process OLINK_REVEAL_NPX_MAP_PROJECT_EXPORT {
     }
     def args = task.ext.args ?: ''
     """
+    /app/npx-map-cli/npx-map-cli \\
     project \\
       export \\
       ${args} \\
@@ -95,7 +96,7 @@ process OLINK_REVEAL_NPX_MAP_PROJECT_EXPORT {
     
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        npx_map: \$( --version )
+        npx_map: \$( /app/npx-map-cli/npx-map-cli --version )
     END_VERSIONS
     """
 
