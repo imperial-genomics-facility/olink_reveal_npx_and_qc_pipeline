@@ -11,3 +11,4 @@ AdapterRead2,AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
 
 [Data]
 Sample_ID,Sample_Name,index,Sample_Project,Description
+olink_reveal,,,,
