@@ -18,15 +18,24 @@ workflow DEMULT_SUBSAMPLE_QC {
             file(run_dir)
         ))
         BCLCONVERT(run_ch)
-        undetermined_fastqs = BCLCONVERT.out.undetermined
-        formatted_fqs = undetermined_fastqs
-                        .map { entry -> entry[1]
-                        }
-                        .flatMap()
-                        .map { fq ->
-                            def id = fq.baseName //.replaceAll(/\.fastq\.gz$/, '')
-                            [[id: id], fq, 10000]
-                        }
+        //undetermined_fastqs = BCLCONVERT.out.undetermined
+        // formatted_fqs = undetermined_fastqs
+        //                 .map { entry -> entry[1]
+        //                 }
+        //                 .flatMap()
+        //                 .map { fq ->
+        //                     def id = fq.baseName //.replaceAll(/\.fastq\.gz$/, '')
+        //                     [[id: id], fq, 10000]
+        //                 }
+        fastqs = BCLCONVERT.out.fastq
+        formatted_fqs = fastqs
+                .map { entry -> entry[1]
+            }
+            .flatMap()
+            .map { fq ->
+                def id = fq.baseName //.replaceAll(/\.fastq\.gz$/, '')
+                [[id: id], fq, 10000]
+            }
         SEQTK_SAMPLE(formatted_fqs)
         FASTQC(SEQTK_SAMPLE.out.reads)
     emit:
