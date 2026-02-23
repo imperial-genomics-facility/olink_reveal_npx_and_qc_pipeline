@@ -64,3 +64,57 @@ A Nextflow pipeline for raw sequencing run to NPX file and QC report generation
 * Step 4: Build Singularity image
 
     `singularity build igf_olink_r_qc_v0.1.sif docker-archive:igf_olink_r_qc_v0.1.tar`
+
+## Steps for pipeline run
+
+### Create a custom nextflow config file
+
+<pre><code>params {
+run_id = "RUN_ID"
+        run_dir = "/PATH/RUN_DIR"
+        plate_design_csv = "/PATH/design.csv"
+        reveal_fixed_lod_csv = "/PATH/Reveal_Fixed_LOD.csv"
+        project_name = "Project"
+        sample_type = "Sample"
+        dataAnalysisRefIds = "R10003"
+        panelDataArchive = "/PATH/NPXMap_PanelDataArchive_2.0.0.dat"
+}
+
+
+process {
+
+   withName: BCLCONVERT {
+    cpus = 2
+    memory = "8 GB"
+    container = "file:///PATH/bclconvert_v4.4.6.sif"
+   }
+
+
+  withName: OLINK_NGS2COUNTS {
+    cpus = 1
+    memory = "4 GB"
+    container = "file:///PATH/igf_olink_ngs2counts_v6.2.sif"
+   }
+
+  withName: OLINK_REVEAL_NPX_MAP_PROJECT_CREATE {
+    cpus = 1
+    memory = "4 GB"
+    container = "file:///PATH/npx-map-cli.sif"
+   }
+    
+  withName: OLINK_REVEAL_NPX_MAP_PROJECT_EXPORT {
+    cpus = 1
+    memory = "4 GB"
+    container = "file:///PATH/npx-map-cli.sif"
+   }
+  
+  withName: OLINK_REVEAL_R_QC {
+    cpus = 1
+    memory = "4 GB"
+    container = "file:///PATH/igf_olink_r_qc_v0.1.sif"
+   }
+}</code></pre>
+
+### Run Nextflow pipeline with custom config file
+
+<pre><code>nextflow run -c custom.config /PATH/main.nf</code></pre>
