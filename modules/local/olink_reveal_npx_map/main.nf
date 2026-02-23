@@ -47,10 +47,10 @@ EOF
       -i npx_config.json \\
       -o project_dir
     
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        npx_map: \$( /app/npx-map-cli/npx-map-cli --version )
-    END_VERSIONS
+    cat <<-'END_VERSIONS' > versions.yml
+"${task.process}":
+    npx_map: \$( /app/npx-map-cli/npx-map-cli --version )
+END_VERSIONS
     """
 
     stub:
@@ -95,10 +95,10 @@ process OLINK_REVEAL_NPX_MAP_PROJECT_EXPORT {
       --analysis-report \\
       -p $panelDataArchive
     
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        npx_map: \$( /app/npx-map-cli/npx-map-cli --version )
-    END_VERSIONS
+    cat <<-'END_VERSIONS' > versions.yml
+"${task.process}":
+    npx_map: \$( /app/npx-map-cli/npx-map-cli --version )
+END_VERSIONS
     """
 
     stub:

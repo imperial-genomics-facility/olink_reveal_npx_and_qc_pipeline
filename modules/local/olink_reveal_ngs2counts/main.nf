@@ -25,10 +25,10 @@ process OLINK_NGS2COUNTS {
       --split-by-library \\
       $run_dir &> ${meta.id}_logs.txt
     
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        ngs2counts: \$( ngs2counts --version|cut -d ',' -f1 )
-    END_VERSIONS
+    cat <<-'END_VERSIONS' > versions.yml
+"${task.process}":
+    ngs2counts: \$( ngs2counts --version|cut -d ',' -f1 )
+END_VERSIONS
     """
 
     stub:
