@@ -26,7 +26,7 @@ process OLINK_REVEAL_NPX_MAP_PROJECT_CREATE {
     def args = task.ext.args ?: ''
     // Get template and create json file
     def engine = new SimpleTemplateEngine()
-    def template = file("templates/npx_config.json").text
+    def template = file("${moduleDir}/templates/npx_config.json").text
     def conf = engine.createTemplate(template).make([
         project_name : project_name,
         sample_type: sample_type,
@@ -69,6 +69,7 @@ process OLINK_REVEAL_NPX_MAP_PROJECT_EXPORT {
 
     input:
     tuple val(meta), path(npx_map_project)
+    path panelDataArchive
 
 
     output:
@@ -92,7 +93,7 @@ process OLINK_REVEAL_NPX_MAP_PROJECT_EXPORT {
       --npx \\
       --npx-csv \\
       --analysis-report \\
-      -p /data/NPXMap_PanelDataArchive_2.0.0.dat
+      -p $panelDataArchive
     
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
