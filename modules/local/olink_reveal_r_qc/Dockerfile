@@ -8,6 +8,12 @@ RUN R -e 'install.packages("OlinkAnalyze", repos="https://cloud.r-project.org/")
     R -e 'install.packages("ggplot2", repos="https://cloud.r-project.org/");' && \
     R -e 'install.packages("stringr", repos="https://cloud.r-project.org/");' && \
     R -e 'install.packages("arrow", repos="https://cloud.r-project.org/");' && \
+    R -e 'install.packages("tidyverse", repos="https://cloud.r-project.org/");' && \
+    R -e 'install.packages("ggrepel", repos="https://cloud.r-project.org/");' && \
+    R -e 'install.packages("umap", repos="https://cloud.r-project.org/");' && \
+    R -e 'install.packages("pheatmap", repos="https://cloud.r-project.org/");' && \
+    R -e 'install.packages("patchwork", repos="https://cloud.r-project.org/");' && \
+    R -e 'install.packages("scales", repos="https://cloud.r-project.org/");' && \
     R -e 'install.packages("ggpubr", repos="https://cloud.r-project.org/");'
 RUN apt-get install --no-install-recommends --fix-missing -y python3 && \
     apt-get clean && \
