@@ -1,4 +1,3 @@
-import groovy.text.SimpleTemplateEngine
 process OLINK_REVEAL_R_QC {
     tag "$meta.id"
     label 'process_medium'
@@ -21,16 +20,12 @@ process OLINK_REVEAL_R_QC {
     // check args
     def args = task.ext.args ?: ''
     // generate template
-    def engine = new SimpleTemplateEngine()
     def template = file("${moduleDir}/templates/olink_reveal_QC_report.ipynb").text
-    def conf = engine.createTemplate(template).make([
-        npx_parquet_file : npx_parquet_file,
-        reveal_fixed_lod_csv: reveal_fixed_lod_csv.name
-    ])
-    def string_conf = conf.toString()
+                   .replace('$npx_parquet_file', npx_parquet_file.name)
+                   .replace('$reveal_fixed_lod_csv', reveal_fixed_lod_csv.name)
     """
     cat > olink_reveal_QC_report.ipynb <<'EOF'
-${string_conf}
+${template}
 EOF
 
     jupyter \\
@@ -39,7 +34,7 @@ EOF
       --to html \\
       --ExecutePreprocessor.enabled=True \\
       --ExecutePreprocessor.timeout=1200 \\
-      --ExecutePreprocessor.kernel_name=R \\
+      --ExecutePreprocessor.kernel_name=IR \\
       --execute olink_reveal_QC_report.ipynb
     """
 
