@@ -39,7 +39,7 @@ EOF
       --to html \\
       --ExecutePreprocessor.enabled=True \\
       --ExecutePreprocessor.timeout=1200 \\
-      ----ExecutePreprocessor.kernel_name=R \\
+      --ExecutePreprocessor.kernel_name=R \\
       --execute olink_reveal_QC_report.ipynb
     """
 
