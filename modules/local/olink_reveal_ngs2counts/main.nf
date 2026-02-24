@@ -22,7 +22,6 @@ process OLINK_NGS2COUNTS {
       ngs2counts \\
       ${args} \\
       --output-dir ${meta.id}_ngs2counts_out \\
-      --split-by-library \\
       $run_dir &> ${meta.id}_logs.txt
     
     cat <<-'END_VERSIONS' > versions.yml
