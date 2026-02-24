@@ -24,7 +24,7 @@ process OLINK_REVEAL_R_QC {
     def engine = new SimpleTemplateEngine()
     def template = file("${moduleDir}/templates/olink_reveal_QC_report.ipynb").text
     def conf = engine.createTemplate(template).make([
-        count2npx_out : npx_parquet_file,
+        npx_parquet_file : npx_parquet_file,
         reveal_fixed_lod_csv: reveal_fixed_lod_csv.name
     ])
     def string_conf = conf.toString()
