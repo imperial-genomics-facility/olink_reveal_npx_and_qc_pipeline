@@ -1,6 +1,10 @@
 # Nextflow pipeline for Olink Reveal data processing
 A Nextflow pipeline for raw sequencing run to NPX file and QC report generation
 
+## Description
+
+This Nextflow pipeline processes Olink Reveal libraries from raw Illumina sequencing runs. It takes a sequencing run and plate design as input, then demultiplexes reads using BCLConvert, subsamples them with SEQTK, and generates FastQC reports for sequencing quality assessment. Finally, it produces NPX export datasets and QC reports.
+
 ## Steps for container image building
 
 ### BCLConvert
