@@ -1,2 +1,124 @@
-# olink_reveal_qc_nextflow
+# Nextflow pipeline for Olink Reveal data processing
 A Nextflow pipeline for raw sequencing run to NPX file and QC report generation
+
+## Description
+
+This Nextflow pipeline processes Olink Reveal libraries from raw Illumina sequencing runs. It takes a sequencing run and plate design as input, then demultiplexes reads using BCLConvert, subsamples them with SEQTK, and generates FastQC reports for sequencing quality assessment. Finally, it produces NPX export datasets and QC reports.
+
+## Steps for container image building
+
+### BCLConvert
+
+* Step 1: Go to BCLConvert module directory
+
+    `cd modules/nf-core/bclconvert`
+
+* Step 2: Download BCLConvert from [Illumina website](https://support.illumina.com/downloads/bcl-convert-v4-4-6-installers.html)
+
+* Step 3: Build Docker image
+
+    `docker build -t bclconvert:v4.4.6 .`
+
+* Step 4: Export Docker image to tar
+
+    `docker image save bclconvert:v4.4.6 -o bclconvert_v4.4.6.tar`
+
+* Step 5: Build Singularity image
+
+    `singularity build bclconvert_v4.4.6.sif docker-archive:bclconvert_v4.4.6.tar`
+
+### Olink NGS2COUNTS
+
+* Step 1: Go to olink_reveal_ngs2counts module directory
+
+    `cd modules/local/olink_reveal_ngs2counts`
+
+* Step 2: Build Docker image
+
+    `docker build -t igf_olink_ngs2counts:v6.2 .`
+
+* Step 3: Export Docker image to tar
+
+    `docker image save igf_olink_ngs2counts:v6.2 -o igf_olink_ngs2counts_v6.2.tar`
+
+* Step 4: Build Singularity image
+
+    `singularity build igf_olink_ngs2counts_v6.2.sif docker-archive:igf_olink_ngs2counts_v6.2.tar`
+
+### Olink NPX-MAP-CLI
+
+* Step 1: Download NPX-MAP-CLI package from [Olink website](https://olink.com/software/download)
+
+* Step 2: Extract the zip file and copy the `npx-map-cli.sif` from `npx-map-cli-hpc.zip`
+
+### Olink Reveal R
+
+* Step 1: Go to olink_reveal_r_qc module directory
+
+    `cd modules/local/olink_reveal_r_qc`
+
+* Step 2: Build Docker image
+
+    `docker build -t igf_olink_r_qc:v0.1 .`
+
+* Step 3: Export Docker image to tar
+
+    `docker image save igf_olink_r_qc:v0.1 -o igf_olink_r_qc_v0.1.tar`
+
+* Step 4: Build Singularity image
+
+    `singularity build igf_olink_r_qc_v0.1.sif docker-archive:igf_olink_r_qc_v0.1.tar`
+
+## Steps for pipeline run
+
+### Create a custom nextflow config file
+
+<pre><code>params {
+run_id = "RUN_ID"
+        run_dir = "/PATH/RUN_DIR"
+        plate_design_csv = "/PATH/design.csv"
+        reveal_fixed_lod_csv = "/PATH/Reveal_Fixed_LOD.csv"
+        project_name = "Project"
+        sample_type = "Sample"
+        dataAnalysisRefIds = "R10003"
+        panelDataArchive = "/PATH/NPXMap_PanelDataArchive_2.0.0.dat"
+}
+
+
+process {
+
+   withName: BCLCONVERT {
+    cpus = 2
+    memory = "8 GB"
+    container = "file:///PATH/bclconvert_v4.4.6.sif"
+   }
+
+
+  withName: OLINK_NGS2COUNTS {
+    cpus = 1
+    memory = "4 GB"
+    container = "file:///PATH/igf_olink_ngs2counts_v6.2.sif"
+   }
+
+  withName: OLINK_REVEAL_NPX_MAP_PROJECT_CREATE {
+    cpus = 1
+    memory = "4 GB"
+    container = "file:///PATH/npx-map-cli.sif"
+   }
+    
+  withName: OLINK_REVEAL_NPX_MAP_PROJECT_EXPORT {
+    cpus = 1
+    memory = "4 GB"
+    container = "file:///PATH/npx-map-cli.sif"
+   }
+  
+  withName: OLINK_REVEAL_R_QC {
+    cpus = 1
+    memory = "4 GB"
+    container = "file:///PATH/igf_olink_r_qc_v0.1.sif"
+   }
+}</code></pre>
+
+### Run Nextflow pipeline with custom config file
+
+<pre><code>nextflow run -c custom.config /PATH/main.nf</code></pre>
