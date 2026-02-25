@@ -117,8 +117,14 @@ process {
     memory = "4 GB"
     container = "file:///PATH/igf_olink_r_qc_v0.1.sif"
    }
+}
+
+singularity {
+    enabled = true
+    autoMounts = true
+    runOptions = "-B /PATH/INPUT,/PATH/OUTPUT,$EPHEMERAL:/tmp,$EPHEMERAL:/var/tmp"
 }</code></pre>
 
 ### Run Nextflow pipeline with custom config file
 
-<pre><code>nextflow run -c custom.config /PATH/main.nf</code></pre>
+<pre><code>nextflow run -c custom.config /PATH/olink_reveal_qc_nextflow/main.nf</code></pre>
