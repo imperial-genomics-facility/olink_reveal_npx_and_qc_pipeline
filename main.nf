@@ -26,6 +26,7 @@ workflow {
         def required_params = [
             'run_id',
             'run_dir',
+            'indexPlate',
             'project_name',
             'sample_type',
             'plate_design_csv',
@@ -46,6 +47,7 @@ workflow {
         OLINK_COUNT_QC(
             params.run_id,
             params.run_dir,
+            params.indexPlate,
             params.plate_design_csv,
             params.reveal_fixed_lod_csv,
             params.project_name,

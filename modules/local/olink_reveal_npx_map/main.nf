@@ -10,6 +10,7 @@ process OLINK_REVEAL_NPX_MAP_PROJECT_CREATE {
     tuple val(meta), path(ngs2counts_out)
     tuple val(project_name),
           val(sample_type),
+          val(indexPlate),
           val(dataAnalysisRefIds),
           path(plate_design_csv),
           path(panelDataArchive)
@@ -30,6 +31,7 @@ process OLINK_REVEAL_NPX_MAP_PROJECT_CREATE {
     def conf = engine.createTemplate(template).make([
         project_name : project_name,
         sample_type: sample_type,
+        indexPlate: indexPlate,
         design_csv_path: plate_design_csv,
         ngs2counts_out: ngs2counts_out,
         dataAnalysisRefIds: dataAnalysisRefIds

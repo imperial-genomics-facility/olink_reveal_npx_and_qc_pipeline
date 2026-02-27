@@ -10,6 +10,7 @@ nextflow_pipeline {
             params {
                 run_id = "run1"
                 run_dir = "${projectDir}/workflows/templates"
+                indexPlate = "A"
                 project_name = "project1"
                 sample_type = "test_samples"
                 plate_design_csv = "${projectDir}/test_data/plate_design.csv"
