@@ -49,6 +49,7 @@ workflow OLINK_COUNT_QC {
     take:
         run_id
         run_dir
+        indexPlate
         plate_design_csv
         reveal_fixed_lod_csv
         project_name
@@ -61,6 +62,7 @@ workflow OLINK_COUNT_QC {
         olink_project_ch = channel.of(tuple(
             project_name,
             sample_type,
+            indexPlate,
             dataAnalysisRefIds,
             plate_design_csv,
             panelDataArchive

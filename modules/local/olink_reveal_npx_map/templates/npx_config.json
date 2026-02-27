@@ -20,7 +20,7 @@
                 {
                     "plateLayout": "plate1",
                     "libraryNumber": 1,
-                    "indexPlate": "A",
+                    "indexPlate": "$indexPlate",
                     "panel": "Reveal",
                     "included": true
                 }
