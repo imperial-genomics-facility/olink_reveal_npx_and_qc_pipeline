@@ -17,16 +17,13 @@ process OLINK_REVEAL_R_QC {
     if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
         error("OLINK module only supports Docker, Podman and Singularity.")
     }
-    // check args
-    def args = task.ext.args ?: ''
-    // generate template
-    def template = file("${moduleDir}/templates/olink_reveal_QC_report.ipynb").text
-                   .replace('$npx_parquet_file', npx_parquet_file.name)
-                   .replace('$reveal_fixed_lod_csv', reveal_fixed_lod_csv.name)
     """
-    cat > olink_reveal_QC_report.ipynb <<'EOF'
-${template}
-EOF
+    cp ${moduleDir}/templates/olink_reveal_QC_report.ipynb .
+
+    sed -i \
+    -e 's|\$npx_parquet_file|${npx_parquet_file.name}|g' \
+    -e 's|\$reveal_fixed_lod_csv|${reveal_fixed_lod_csv.name}|g' \
+    olink_reveal_QC_report.ipynb
 
     jupyter \\
       nbconvert \\
