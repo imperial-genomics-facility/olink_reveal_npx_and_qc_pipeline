@@ -59,15 +59,15 @@ This Nextflow pipeline processes Olink Reveal libraries from raw Illumina sequen
 
 * Step 2: Build Docker image
 
-    `docker build -t igf_olink_r_qc:v0.1 .`
+    `docker build -t igf_olink_r_qc:v0.3 .`
 
 * Step 3: Export Docker image to tar
 
-    `docker image save igf_olink_r_qc:v0.1 -o igf_olink_r_qc_v0.1.tar`
+    `docker image save igf_olink_r_qc:v0.3 -o igf_olink_r_qc_v0.3.tar`
 
 * Step 4: Build Singularity image
 
-    `singularity build igf_olink_r_qc_v0.1.sif docker-archive:igf_olink_r_qc_v0.1.tar`
+    `singularity build igf_olink_r_qc_v0.3.sif docker-archive:igf_olink_r_qc_v0.3.tar`
 
 ## Steps for pipeline run
 
@@ -75,7 +75,7 @@ This Nextflow pipeline processes Olink Reveal libraries from raw Illumina sequen
 
 <pre><code>params {
 run_id = "RUN_ID"
-        run_dir = "/PATH/RUN_DIR"
+        run_dir = "/PATH/RUN_DIR/RUN_ID"
         plate_design_csv = "/PATH/design.csv"
         reveal_fixed_lod_csv = "/PATH/Reveal_Fixed_LOD.csv"
         project_name = "Project"
@@ -115,7 +115,7 @@ process {
   withName: OLINK_REVEAL_R_QC {
     cpus = 1
     memory = "4 GB"
-    container = "file:///PATH/igf_olink_r_qc_v0.1.sif"
+    container = "file:///PATH/igf_olink_r_qc_v0.3.sif"
    }
 }
 
