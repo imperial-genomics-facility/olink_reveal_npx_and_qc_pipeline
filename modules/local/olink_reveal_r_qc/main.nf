@@ -13,6 +13,7 @@ process OLINK_REVEAL_R_QC {
     path "olink_reveal_QC_report.html" , emit: npx_qc_html
 
     script:
+    def args = task.ext.args ?: ''
     // Exit if running this module with -profile conda / -profile mamba 
     if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
         error("OLINK module only supports Docker, Podman and Singularity.")
